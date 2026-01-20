@@ -184,11 +184,14 @@
       #mono
       mullvad-browser
       mullvad-vpn
+      neovim
       nixd
       nodePackages.eslint
       nodePackages.prettier
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
+      ollama
+      ollama-cuda
       #osu-lazer-bin
       #OVMFFull
       pandoc
@@ -208,6 +211,7 @@
       ripgrep
       rust-analyzer
       shellcheck
+      sillytavern
       #spice-gtk
       #spice-vdagent
       spotify
