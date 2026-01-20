@@ -401,7 +401,6 @@
       libva
       libva-utils
       libva-vdpau-driver
-      vaapiVdpau
 
       # Vulkan and graphics optimization with surface extensions for Steam GUI
       #protontricks  # May have FHS conflicts
@@ -436,7 +435,6 @@
       vulkan-loader
       vulkan-validation-layers
       libva-vdpau-driver
-      vaapiVdpau
 
       # 32-bit Vulkan WSI extensions for Steam GUI compatibility
       xorg.libX11
