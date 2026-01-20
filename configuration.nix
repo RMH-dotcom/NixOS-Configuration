@@ -41,7 +41,7 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
+  system.copySystemConfiguration = true;
   system.autoUpgrade = {
     enable = false;
     allowReboot = false;
@@ -137,6 +137,15 @@
       clang-tools
       claude-code
       cmake
+      (ciscoPacketTracer8.override {
+        packetTracerSource = /home/nixoslaptopmak/Packages-Flakes/cisco-packet-tracer/CiscoPacketTracer822_amd64_signed.deb;
+      })
+      (writeShellScriptBin "packettracer-offline" ''
+        exec ${pkgs.firejail}/bin/firejail --noprofile --net=none ${ciscoPacketTracer8.override {
+          packetTracerSource = /home/nixoslaptopmak/Packages-Flakes/cisco-packet-tracer/CiscoPacketTracer822_amd64_signed.deb;
+        }}/bin/packettracer "$@"
+      '')
+      firejail
       #cudaPackages.cudatoolkit
       #cudaPackages.cudnn
       #cudaPackages.cuda_cudart
@@ -184,6 +193,7 @@
       #OVMFFull
       pandoc
       parabolic
+      prismlauncher
       protonup-qt
       pyright
       python312Packages.debugpy
@@ -342,7 +352,10 @@
     cudaSupport = true;
     cudaCapabilities = [ "7.5" ];
     nvidia.acceptLicense = true;
-    permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
+    permittedInsecurePackages = [
+      "ciscoPacketTracer8-8.2.2"
+      "qtwebkit-5.212.0-alpha4"
+    ];
     packageOverrides = pkgs: {
       firefox = pkgs.firefox-bin;
     };
