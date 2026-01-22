@@ -134,9 +134,6 @@
       bash-language-server
       black
       #brave
-      clang-tools
-      claude-code
-      cmake
       (ciscoPacketTracer8.override {
         packetTracerSource = /home/nixoslaptopmak/Packages-Flakes/cisco-packet-tracer/CiscoPacketTracer822_amd64_signed.deb;
       })
@@ -145,6 +142,9 @@
           packetTracerSource = /home/nixoslaptopmak/Packages-Flakes/cisco-packet-tracer/CiscoPacketTracer822_amd64_signed.deb;
         }}/bin/packettracer "$@"
       '')
+      clang-tools
+      claude-code
+      cmake
       firejail
       #cudaPackages.cudatoolkit
       #cudaPackages.cudnn
@@ -155,7 +155,6 @@
       direnv
       discord
       #dpkg
-      #(pkgs.emacs-pgtk.pkgs.withPackages (epkgs: with epkgs; []))
       fd
       ffmpeg
       firefox-bin
@@ -176,7 +175,7 @@
       #jetbrains.clion
       #jetbrains.pycharm-professional
       #jdk23
-      (koboldcpp.override { config.cudaSupport = true; })
+      #(koboldcpp.override { config.cudaSupport = true; })
       #libguestfs
       #libreoffice
       linuxKernel.packages.linux_zen.cpupower
@@ -184,7 +183,6 @@
       #mono
       mullvad-browser
       mullvad-vpn
-      neovim
       nixd
       nodePackages.eslint
       nodePackages.prettier
@@ -244,106 +242,6 @@
     #};
   #};
 
-  # Emacs
-  services.emacs = {
-      enable = true;
-      package = pkgs.emacs-pgtk.pkgs.withPackages (epkgs: with epkgs; [
-        # Core package management
-        use-package
-
-        # LSP and IDE features
-        lsp-mode
-        lsp-ui
-        company
-        flycheck
-        dap-mode               # Optional, may need manual install
-
-        # Language modes
-        python-mode
-        nix-mode
-        web-mode
-        typescript-mode
-        go-mode
-        rust-mode
-        cmake-mode
-        markdown-mode
-
-        # Development tools
-        pyvenv                   # Python virtual environments
-        blacken                  # Black formatter integration
-        pytest                   # Python testing
-        cargo                    # Rust cargo integration
-        direnv                   # Environment management
-
-        # IDE enhancements
-        which-key
-        smartparens
-        multiple-cursors
-        yasnippet
-        format-all
-
-        # Navigation and search
-        ivy
-        counsel
-        swiper
-        projectile
-        treemacs
-
-        # Git integration
-        magit
-
-        # Terminal
-        vterm
-
-        # UI/Themes (optional)
-        all-the-icons
-        doom-modeline
-        doom-themes
-
-        # Additional utilities
-        helpful
-        ace-window
-        all-the-icons-dired         # Icons in dired
-        code-cells
-        company-box
-        dap-mode
-        deadgrep
-        devdocs
-        duplicate-thing
-        ein
-        embark
-        embark-consult
-        forge
-        gcmh                        # Garbage collection magic hack
-        git-link
-        git-modes
-        highlight-indent-guides     # Indentation guides
-        hl-todo                     # Highlight TODO/FIXME/etc
-        jupyter
-        lsp-ivy
-        lsp-treemacs
-        marginalia
-        multi-vterm
-        no-littering                # Keep .emacs.d clean
-        org-bullets                  # Pretty bullets for Org
-        org-roam                     # Note-taking system
-        org-superstar                # Alternative to org-bullets
-        poly-markdown
-        pip-requirements             # Requirements.txt mode
-        python-black                # Black formatter integration
-        python-pytest               # Enhanced pytest integration
-        quickrun
-        rainbow-delimiters          # Colorful parentheses
-        tldr
-        treemacs-icons-dired
-        treemacs-magit
-        treemacs-projectile
-        vterm-toggle
-        yasnippet-snippets           # Community snippet collection
-      ]);
-      defaultEditor = true;      # Optional: make Emacs the default editor
-  };
-
   # Nixpkgs settings
   nixpkgs.config = {
     allowUnfree = true;
@@ -372,7 +270,7 @@
     git.enable = true;
     java = {
       enable = true;
-      package = pkgs.jdk17;
+      package = pkgs.jdk25_headless;
     };
   };
   services = {
@@ -520,28 +418,6 @@
       background = "${/home/nixoslaptopmak/Pictures/bvs01.jpg}";
       loginBackground = true;
     })
-
-    # Terminal and shell tools for Emacs
-    libvterm          # Required for vterm
-    cmake             # For compiling vterm
-    libtool           # Build dependency
-    ripgrep           # Fast grep replacement
-    fd                # Fast find replacement
-    fzf               # Fuzzy finder
-    silver-searcher   # Fast text search (ag)
-    tree              # Directory tree viewer
-    bat               # Better cat with syntax highlighting
-    eza               # Better ls
-
-    # Additional gaming libraries
-    libgdiplus
-    keyutils
-
-    # Performance monitoring and optimization tools
-    htop
-    iotop
-    nethogs
-    stress-ng
   ];
 
   # Firewall - Steam gaming ports
