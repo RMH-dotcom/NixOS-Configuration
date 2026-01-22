@@ -272,6 +272,16 @@
       enable = true;
       package = pkgs.jdk25_headless;
     };
+    ssh = {
+      startAgent = true;
+      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    };
+  };
+
+  # Environment variables for SSH/KWallet integration
+  environment.sessionVariables = {
+    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    SSH_ASKPASS_REQUIRE = "prefer";
   };
   services = {
     mullvad-vpn.enable = true;
@@ -410,6 +420,10 @@
       ];
       runScript = "bash";
     })
+
+    # SSH and KWallet integration
+    ksshaskpass
+
     jetbrains-mono
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
