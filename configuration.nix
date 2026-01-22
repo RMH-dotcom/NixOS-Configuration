@@ -176,6 +176,7 @@
       #jetbrains.pycharm-professional
       #jdk23
       #(koboldcpp.override { config.cudaSupport = true; })
+      kdePackages.ksshaskpass # SSH and KWallet integration
       #libguestfs
       #libreoffice
       linuxKernel.packages.linux_zen.cpupower
@@ -420,10 +421,6 @@
       ];
       runScript = "bash";
     })
-
-    # SSH and KWallet integration
-    ksshaskpass
-
     jetbrains-mono
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
