@@ -5,7 +5,6 @@ My NixOS system configuration files.
 ## Files
 
 - `configuration.nix` - Main system configuration
-- `hardware-configuration.nix` - Hardware-specific configuration  
 - `neovim.nix` - Neovim setup
 - `steam.nix` - Steam and gaming configuration
 - `security-hardening.nix` - Security hardening settings
