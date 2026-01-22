@@ -9,6 +9,7 @@
     pyright          # Python
     clang-tools      # C/C++ (includes clangd)
     nixd             # Nix
+    jdt-language-server  # Java
 
     # Essential tools for Telescope and other plugins
     ripgrep          # Fast grep for Telescope

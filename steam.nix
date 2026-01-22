@@ -10,29 +10,29 @@
   environment.systemPackages = with pkgs; [
     # Gaming mode wrapper script with aggressive optimizations
     (writeShellScriptBin "gaming-steam" ''
-      echo "🎮 Activating MAXIMUM GAMING PERFORMANCE..."
+      echo "Activating MAXIMUM GAMING PERFORMANCE..."
 
       # Apply ALL system optimizations FIRST (blocking - must complete before Steam)
-      echo "🌡️ CPU: Switching to balanced governor for thermal safety..."
+      echo "PU: Switching to balanced governor for thermal safety..."
       for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
         [ -f "$cpu" ] && echo powersave | sudo tee "$cpu" > /dev/null 2>&1 || true
       done
 
-      echo "❄️ CPU: Disabling turbo boost to prevent overheating..."
+      echo "PU: Disabling turbo boost to prevent overheating..."
       echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo > /dev/null 2>&1 || true
 
-      echo "🎯 GPU: Forcing maximum performance mode..."
+      echo "GPU: Forcing maximum performance mode..."
       sudo nvidia-smi -pm 1 > /dev/null 2>&1 || true
       sudo nvidia-smi -ac 6001,1530 > /dev/null 2>&1 || true
 
-      echo "💾 SYSTEM: Optimizing memory and I/O..."
+      echo "SYSTEM: Optimizing memory and I/O..."
       echo 1 | sudo tee /proc/sys/vm/swappiness > /dev/null 2>&1 || true
       echo 15 | sudo tee /proc/sys/vm/dirty_background_ratio > /dev/null 2>&1 || true
       echo 50 | sudo tee /proc/sys/vm/dirty_ratio > /dev/null 2>&1 || true
 
-      echo "✅ All optimizations applied successfully!"
+      echo "All optimizations applied successfully!"
 
-      echo "🎮 Starting Steam with MAXIMUM PERFORMANCE..."
+      echo "Starting Steam with MAXIMUM PERFORMANCE..."
 
       # Preserve current session environment (critical for GUI)
       export DISPLAY="''${DISPLAY:-:0}"
@@ -128,7 +128,7 @@
       # Wait for Steam to exit (keeps optimizations active during entire session)
       wait $STEAM_PID
 
-      echo "🔄 Maintaining thermal-safe settings..."
+      echo "Maintaining thermal-safe settings..."
       # Keep CPU in thermal-safe mode (already set to powersave + no turbo)
       for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
         [ -f "$cpu" ] && echo powersave | sudo tee "$cpu" > /dev/null 2>&1 || true
@@ -144,7 +144,7 @@
       echo 10 | sudo tee /proc/sys/vm/dirty_background_ratio > /dev/null 2>&1 || true
       echo 20 | sudo tee /proc/sys/vm/dirty_ratio > /dev/null 2>&1 || true
 
-      echo "✅ Power-efficient mode restored"
+      echo "Power-efficient mode restored"
     '')
   ];
 
