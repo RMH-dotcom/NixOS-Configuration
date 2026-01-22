@@ -1,0 +1,17 @@
+# Hardware-specific configuration (machine-specific, should not be shared)
+hardware-configuration.nix
+
+# Result symlinks from nix builds
+result
+result-*
+
+# Editor files
+*.swp
+*.swo
+*.swn
+*~
+.*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
